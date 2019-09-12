@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="action mt-3 mb-4">
+    <h4>Banners cadastrados nesta homepage:</h4>
+    <button type="button" class="btn btn-warning" [ngx-scroll-to]="'#destination'" (click)="toggle()">Adicionar Banner</button>
+    <div class="row">
+      <div class="col-md-12">
+        <!-- search form -->
+        <app-search-form></app-search-form>
+      </div>
+    </div>
+  </div>
+
+  <!-- all banners -->
+  <div *ngIf="banners$ | async as banners; else loading">
+    <div *ngFor="let banner of banners">
+      <div class="card mb-3 mt-3" >
+        <div class="card-header">
+          Banner
+        </div>
+        <div class="card-body" >
+          <h5 class="card-title">{{banner.title}}</h5>
+          <p class="card-text">{{banner.description}}</p>
+          <button class="btn btn-primary" (click)="callEdit(banner._id)">Editar</button>
+          <button class="btn btn-danger ml-2" (click)="delete(banner._id)">Deletar</button>
+        </div>
+        <div class="card-body">
+          <!-- TODO: criar form/componente de edição do banner -->
+          <!-- Form to edit banner -->
+          <app-banner-edit-form
+            [dataToForm]="banner"
+            *ngIf="edit && banner._id == currentId">
+          </app-banner-edit-form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <span>Carregando banners. . .</span>
+  </ng-template>
+
+  <div class="creator mt-5" [@childAnimation]="isOpen ? 'open' : 'closed'">
+    <div class="creator__header">
+      <h5>Inclusão de banner</h5>
+      <i class="fa fa-times" (click)="toggle()"></i>
+    </div>
+    <!-- Form to create banner -->
+    <div class="creator__box mb-5" id="destination" #destinationRef>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box__item">
+            <app-banner-form></app-banner-form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

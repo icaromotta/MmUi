@@ -1,0 +1,19 @@
+<form [formGroup]="formBanner" class="form-horizontal">
+  <div class="row">
+    <div class="form-group col-md-6" [ngClass]="aplicaCssErro('title')">
+      <label for="inputTitle">Título</label>
+      <input type="text" class="form-control" formControlName="title" id="inputTitle">
+      <div class="alert alert-danger" *ngIf="verificaValidTouched('title')" role="alert">
+          O título é necessário!
+      </div>
+    </div>
+    <div class="form-group col-md-6" [ngClass]="aplicaCssErro('description')">
+      <label for="inputDescription">Descrição</label>
+      <textarea class="form-control" formControlName="description" id="inputDescription" rows="3"></textarea>
+      <div class="alert alert-danger" *ngIf="verificaValidTouched('description')" role="alert">
+          <p [ngClass]="{cssClass: expression}">A descrição é necessária! Com o minímo de {{ !formBanner.controls.description.value ? characterLimit : characterLimit - formBanner.controls.description.value.length }} caracteres.</p>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-warning" type="submit" (click)="onSubmit()">Enviar</button>
+</form>

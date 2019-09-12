@@ -1,0 +1,40 @@
+.container {
+  .action {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .creator {
+    .creator__header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      i {
+        cursor: pointer;
+      }
+    }
+    .creator__box {
+
+
+
+
+      .box__item {
+        width: 100%;
+        height: auto;
+        cursor: pointer;
+        // background-color: greenyellow;
+      }
+
+
+
+    }
+
+    .creator__box::focus {
+      border-style: groove;
+      border-color: coral;
+      border-width: 7px;
+    }
+  }
+}
